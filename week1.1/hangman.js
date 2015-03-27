@@ -45,8 +45,21 @@ function checkIfGuessUsed(guess)
     }
 }
 
+function isGuessValid(guess) 
+{
+    if(!isNaN(guess))
+    {
+        console.log("Please enter alphabet/word!")
+        return false;
+    }
+
+    return true;
+}
+
 function checkGuess(guess, wordToGuess)
 {
+    if(!isGuessValid(guess)) return false;
+
     if(!(checkIfGuessUsed(guess))) return false;
 
     if(guess === wordToGuess)
@@ -87,20 +100,6 @@ function checkGuess(guess, wordToGuess)
     }
 }
 
-
-var words = ["crocodile", "hangman", "bicycle", "monkey", "literature"];
-var hangWord = words[getRandomInt(0, words.length)];
-var status = "";
-var usedGuesses = "";
-
-status = generateStatus(status, hangWord);
-
-console.log("You have word with " + status.length + " symbols. Thats your current status " + status);
-
-var eCounter = 0;
-
-var prompt = require('prompt');
-
 function promptGuess()
 {
     prompt.get(['guess'], function (err, result)
@@ -118,5 +117,19 @@ function promptGuess()
         }
     })
 }
+
+
+var words = ["crocodile", "hangman", "bicycle", "monkey", "literature"];
+var hangWord = words[getRandomInt(0, words.length)];
+var status = "";
+var usedGuesses = "";
+
+status = generateStatus(status, hangWord);
+
+console.log("You have word with " + status.length + " symbols. Thats your current status " + status);
+
+var eCounter = 0;
+
+var prompt = require('prompt');
 
 promptGuess();
